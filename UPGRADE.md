@@ -3,6 +3,13 @@
 _`MAJOR` version bumps will have upgrade notes
 posted here._
 
+## [2024-03-07] 9.x.x to 10.x.x
+### Overview
+
+##### Twilio Python Helper Library’s major version 10.0.0 is now available. Twiml Voice has a breaking change. Please refer to changelogs.
+
+Twiml Attribute speechModel is now of type string.
+
 ## [2024-02-20] 8.x.x to 9.x.x
 ### Overview
 

@@ -71,6 +71,7 @@ class WebhookInstance(InstanceResource):
             "conversation_sid": conversation_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[WebhookContext] = None
 
     @property
@@ -690,6 +691,7 @@ class WebhookPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return WebhookInstance(
             self._version, payload, conversation_sid=self._solution["conversation_sid"]
         )
@@ -1072,6 +1074,7 @@ class WebhookList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -1098,6 +1101,7 @@ class WebhookList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

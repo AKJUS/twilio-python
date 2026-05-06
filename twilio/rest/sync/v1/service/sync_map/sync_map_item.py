@@ -80,6 +80,7 @@ class SyncMapItemInstance(InstanceResource):
             "map_sid": map_sid,
             "key": key or self.key,
         }
+
         self._context: Optional[SyncMapItemContext] = None
 
     @property
@@ -744,6 +745,7 @@ class SyncMapItemPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SyncMapItemInstance(
             self._version,
             payload,
@@ -1139,6 +1141,7 @@ class SyncMapItemList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 order=order,
@@ -1174,6 +1177,7 @@ class SyncMapItemList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

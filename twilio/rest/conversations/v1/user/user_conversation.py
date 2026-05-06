@@ -99,6 +99,7 @@ class UserConversationInstance(InstanceResource):
             "user_sid": user_sid,
             "conversation_sid": conversation_sid or self.conversation_sid,
         }
+
         self._context: Optional[UserConversationContext] = None
 
     @property
@@ -674,6 +675,7 @@ class UserConversationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return UserConversationInstance(
             self._version, payload, user_sid=self._solution["user_sid"]
         )
@@ -824,6 +826,7 @@ class UserConversationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -850,6 +853,7 @@ class UserConversationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

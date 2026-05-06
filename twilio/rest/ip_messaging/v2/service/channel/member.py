@@ -80,6 +80,7 @@ class MemberInstance(InstanceResource):
             "channel_sid": channel_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[MemberContext] = None
 
     @property
@@ -882,6 +883,7 @@ class MemberPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MemberInstance(
             self._version,
             payload,
@@ -1325,6 +1327,7 @@ class MemberList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 identity=identity,
@@ -1354,6 +1357,7 @@ class MemberList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -53,6 +53,7 @@ class KeyInstance(InstanceResource):
             "account_sid": account_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[KeyContext] = None
 
     @property
@@ -528,6 +529,7 @@ class KeyPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return KeyInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -678,6 +680,7 @@ class KeyList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -704,6 +707,7 @@ class KeyList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

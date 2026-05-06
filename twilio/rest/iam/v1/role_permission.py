@@ -66,6 +66,7 @@ class RolePermissionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return RolePermissionInstance(
             self._version, payload, role_sid=self._solution["role_sid"]
         )
@@ -216,6 +217,7 @@ class RolePermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -242,6 +244,7 @@ class RolePermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

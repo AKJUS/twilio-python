@@ -95,6 +95,7 @@ class ApplicationInstance(InstanceResource):
             "account_sid": account_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ApplicationContext] = None
 
     @property
@@ -1022,6 +1023,7 @@ class ApplicationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ApplicationInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -1560,6 +1562,7 @@ class ApplicationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 friendly_name=friendly_name,
@@ -1589,6 +1592,7 @@ class ApplicationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

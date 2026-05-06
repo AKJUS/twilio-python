@@ -72,6 +72,7 @@ class SentencePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SentenceInstance(
             self._version, payload, transcript_sid=self._solution["transcript_sid"]
         )
@@ -256,6 +257,7 @@ class SentenceList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 redacted=redacted,
@@ -288,6 +290,7 @@ class SentenceList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

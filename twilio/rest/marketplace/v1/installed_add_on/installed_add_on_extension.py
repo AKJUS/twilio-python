@@ -54,6 +54,7 @@ class InstalledAddOnExtensionInstance(InstanceResource):
             "installed_add_on_sid": installed_add_on_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[InstalledAddOnExtensionContext] = None
 
     @property
@@ -415,6 +416,7 @@ class InstalledAddOnExtensionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return InstalledAddOnExtensionInstance(
             self._version,
             payload,
@@ -569,6 +571,7 @@ class InstalledAddOnExtensionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -595,6 +598,7 @@ class InstalledAddOnExtensionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -87,6 +87,7 @@ class UserChannelInstance(InstanceResource):
             "user_sid": user_sid,
             "channel_sid": channel_sid or self.channel_sid,
         }
+
         self._context: Optional[UserChannelContext] = None
 
     @property
@@ -763,6 +764,7 @@ class UserChannelPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return UserChannelInstance(
             self._version,
             payload,
@@ -920,6 +922,7 @@ class UserChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -946,6 +949,7 @@ class UserChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

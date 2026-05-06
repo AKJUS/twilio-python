@@ -61,6 +61,7 @@ class MediaInstance(InstanceResource):
             "message_sid": message_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[MediaContext] = None
 
     @property
@@ -371,6 +372,7 @@ class MediaPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MediaInstance(
             self._version,
             payload,
@@ -576,6 +578,7 @@ class MediaList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 date_created=date_created,
@@ -611,6 +614,7 @@ class MediaList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

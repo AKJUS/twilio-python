@@ -54,6 +54,7 @@ class NetworkAccessProfileNetworkInstance(InstanceResource):
             "network_access_profile_sid": network_access_profile_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[NetworkAccessProfileNetworkContext] = None
 
     @property
@@ -363,6 +364,7 @@ class NetworkAccessProfileNetworkPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return NetworkAccessProfileNetworkInstance(
             self._version,
             payload,
@@ -627,6 +629,7 @@ class NetworkAccessProfileNetworkList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -653,6 +656,7 @@ class NetworkAccessProfileNetworkList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

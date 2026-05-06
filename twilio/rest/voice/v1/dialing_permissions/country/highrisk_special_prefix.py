@@ -54,6 +54,7 @@ class HighriskSpecialPrefixPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return HighriskSpecialPrefixInstance(
             self._version, payload, iso_code=self._solution["iso_code"]
         )
@@ -208,6 +209,7 @@ class HighriskSpecialPrefixList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -234,6 +236,7 @@ class HighriskSpecialPrefixList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

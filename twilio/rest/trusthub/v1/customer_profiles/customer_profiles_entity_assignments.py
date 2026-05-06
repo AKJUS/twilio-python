@@ -55,6 +55,7 @@ class CustomerProfilesEntityAssignmentsInstance(InstanceResource):
             "customer_profile_sid": customer_profile_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[CustomerProfilesEntityAssignmentsContext] = None
 
     @property
@@ -368,6 +369,7 @@ class CustomerProfilesEntityAssignmentsPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return CustomerProfilesEntityAssignmentsInstance(
             self._version,
             payload,
@@ -646,6 +648,7 @@ class CustomerProfilesEntityAssignmentsList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 object_type=object_type,
@@ -675,6 +678,7 @@ class CustomerProfilesEntityAssignmentsList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

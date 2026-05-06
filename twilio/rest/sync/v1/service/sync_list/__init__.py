@@ -73,6 +73,7 @@ class SyncListInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[SyncListContext] = None
 
     @property
@@ -633,6 +634,7 @@ class SyncListPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SyncListInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -933,6 +935,7 @@ class SyncListList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -959,6 +962,7 @@ class SyncListList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

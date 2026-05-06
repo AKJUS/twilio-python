@@ -96,6 +96,7 @@ class OperatorResultInstance(InstanceResource):
             "transcript_sid": transcript_sid,
             "operator_sid": operator_sid or self.operator_sid,
         }
+
         self._context: Optional[OperatorResultContext] = None
 
     @property
@@ -339,6 +340,7 @@ class OperatorResultPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return OperatorResultInstance(
             self._version, payload, transcript_sid=self._solution["transcript_sid"]
         )
@@ -503,6 +505,7 @@ class OperatorResultList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 redacted=redacted,
@@ -532,6 +535,7 @@ class OperatorResultList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

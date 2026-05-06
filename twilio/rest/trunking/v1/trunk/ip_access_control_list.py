@@ -59,6 +59,7 @@ class IpAccessControlListInstance(InstanceResource):
             "trunk_sid": trunk_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[IpAccessControlListContext] = None
 
     @property
@@ -360,6 +361,7 @@ class IpAccessControlListPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return IpAccessControlListInstance(
             self._version, payload, trunk_sid=self._solution["trunk_sid"]
         )
@@ -622,6 +624,7 @@ class IpAccessControlListList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -648,6 +651,7 @@ class IpAccessControlListList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

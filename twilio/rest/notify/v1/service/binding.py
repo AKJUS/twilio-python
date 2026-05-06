@@ -84,6 +84,7 @@ class BindingInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[BindingContext] = None
 
     @property
@@ -383,6 +384,7 @@ class BindingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return BindingInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -817,6 +819,7 @@ class BindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 start_date=start_date,
@@ -855,6 +858,7 @@ class BindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

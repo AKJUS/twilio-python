@@ -103,6 +103,7 @@ class RoomRecordingInstance(InstanceResource):
             "room_sid": room_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[RoomRecordingContext] = None
 
     @property
@@ -402,6 +403,7 @@ class RoomRecordingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return RoomRecordingInstance(
             self._version, payload, room_sid=self._solution["room_sid"]
         )
@@ -614,6 +616,7 @@ class RoomRecordingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 status=status,
@@ -652,6 +655,7 @@ class RoomRecordingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

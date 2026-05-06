@@ -85,6 +85,7 @@ class AddOnResultInstance(InstanceResource):
             "reference_sid": reference_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[AddOnResultContext] = None
 
     @property
@@ -418,6 +419,7 @@ class AddOnResultPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AddOnResultInstance(
             self._version,
             payload,
@@ -575,6 +577,7 @@ class AddOnResultList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -601,6 +604,7 @@ class AddOnResultList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

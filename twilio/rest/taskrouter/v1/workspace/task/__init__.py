@@ -115,6 +115,7 @@ class TaskInstance(InstanceResource):
             "workspace_sid": workspace_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[TaskContext] = None
 
     @property
@@ -844,6 +845,7 @@ class TaskPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return TaskInstance(
             self._version, payload, workspace_sid=self._solution["workspace_sid"]
         )
@@ -1394,6 +1396,7 @@ class TaskList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 priority=priority,
@@ -1450,6 +1453,7 @@ class TaskList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

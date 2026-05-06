@@ -83,6 +83,7 @@ class ParticipantInstance(InstanceResource):
             "room_sid": room_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ParticipantContext] = None
 
     @property
@@ -543,6 +544,7 @@ class ParticipantPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ParticipantInstance(
             self._version, payload, room_sid=self._solution["room_sid"]
         )
@@ -755,6 +757,7 @@ class ParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 status=status,
@@ -793,6 +796,7 @@ class ParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

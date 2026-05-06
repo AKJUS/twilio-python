@@ -69,6 +69,7 @@ class AssetVersionInstance(InstanceResource):
             "asset_sid": asset_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[AssetVersionContext] = None
 
     @property
@@ -273,6 +274,7 @@ class AssetVersionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AssetVersionInstance(
             self._version,
             payload,
@@ -430,6 +432,7 @@ class AssetVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -456,6 +459,7 @@ class AssetVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

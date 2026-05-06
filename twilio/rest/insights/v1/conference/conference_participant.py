@@ -162,6 +162,7 @@ class ConferenceParticipantInstance(InstanceResource):
             "conference_sid": conference_sid,
             "participant_sid": participant_sid or self.participant_sid,
         }
+
         self._context: Optional[ConferenceParticipantContext] = None
 
     @property
@@ -445,6 +446,7 @@ class ConferenceParticipantPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ConferenceParticipantInstance(
             self._version, payload, conference_sid=self._solution["conference_sid"]
         )
@@ -645,6 +647,7 @@ class ConferenceParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 participant_sid=participant_sid,
@@ -680,6 +683,7 @@ class ConferenceParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

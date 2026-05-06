@@ -77,6 +77,7 @@ class ConfiguredPluginInstance(InstanceResource):
             "configuration_sid": configuration_sid,
             "plugin_sid": plugin_sid or self.plugin_sid,
         }
+
         self._context: Optional[ConfiguredPluginContext] = None
 
     @property
@@ -322,6 +323,7 @@ class ConfiguredPluginPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ConfiguredPluginInstance(
             self._version,
             payload,
@@ -490,6 +492,7 @@ class ConfiguredPluginList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 flex_metadata=flex_metadata,
@@ -519,6 +522,7 @@ class ConfiguredPluginList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

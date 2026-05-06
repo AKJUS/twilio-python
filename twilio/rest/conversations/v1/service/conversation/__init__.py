@@ -89,6 +89,7 @@ class ConversationInstance(InstanceResource):
             "chat_service_sid": chat_service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ConversationContext] = None
 
     @property
@@ -1078,6 +1079,7 @@ class ConversationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ConversationInstance(
             self._version, payload, chat_service_sid=self._solution["chat_service_sid"]
         )
@@ -1600,6 +1602,7 @@ class ConversationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 start_date=start_date,
@@ -1635,6 +1638,7 @@ class ConversationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

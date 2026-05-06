@@ -71,6 +71,7 @@ class AuthorizedConnectAppInstance(InstanceResource):
             "account_sid": account_sid,
             "connect_app_sid": connect_app_sid or self.connect_app_sid,
         }
+
         self._context: Optional[AuthorizedConnectAppContext] = None
 
     @property
@@ -268,6 +269,7 @@ class AuthorizedConnectAppPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AuthorizedConnectAppInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -420,6 +422,7 @@ class AuthorizedConnectAppList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -446,6 +449,7 @@ class AuthorizedConnectAppList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

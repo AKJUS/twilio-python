@@ -78,6 +78,7 @@ class EngagementInstance(InstanceResource):
             "flow_sid": flow_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[EngagementContext] = None
 
     @property
@@ -420,6 +421,7 @@ class EngagementPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return EngagementInstance(
             self._version, payload, flow_sid=self._solution["flow_sid"]
         )
@@ -700,6 +702,7 @@ class EngagementList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -726,6 +729,7 @@ class EngagementList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

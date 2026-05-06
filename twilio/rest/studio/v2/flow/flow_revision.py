@@ -76,6 +76,7 @@ class FlowRevisionInstance(InstanceResource):
             "sid": sid,
             "revision": revision or self.revision,
         }
+
         self._context: Optional[FlowRevisionContext] = None
 
     @property
@@ -271,6 +272,7 @@ class FlowRevisionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return FlowRevisionInstance(self._version, payload, sid=self._solution["sid"])
 
     def __repr__(self) -> str:
@@ -419,6 +421,7 @@ class FlowRevisionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -445,6 +448,7 @@ class FlowRevisionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -36,7 +36,6 @@ class V1(Version):
         self._get_api_keys: Optional[GetApiKeysList] = None
         self._new_api_key: Optional[NewApiKeyList] = None
         self._o_auth_apps: Optional[OAuthAppList] = None
-        self._role_permission: Optional[RolePermissionList] = None
         self._token: Optional[TokenList] = None
 
     @property
@@ -63,11 +62,19 @@ class V1(Version):
             self._o_auth_apps = OAuthAppList(self)
         return self._o_auth_apps
 
-    @property
-    def role_permission(self) -> RolePermissionList:
-        if self._role_permission is None:
-            self._role_permission = RolePermissionList(self)
-        return self._role_permission
+    def role_permission(self, role_sid: str, role_permission_id: str = None):
+        """
+        Access the RolePermissionList resource
+
+        :param role_sid: The SID of the Role for which Permissions will be fetched.
+
+        :param role_permission_id: Optional instance ID to directly access RolePermissionContext
+        :returns: RolePermissionList instance if role_permission_id is None, otherwise RolePermissionContext
+        """
+        list_instance = RolePermissionList(self, role_sid)
+        if role_permission_id is not None:
+            return list_instance(role_permission_id)
+        return list_instance
 
     @property
     def token(self) -> TokenList:

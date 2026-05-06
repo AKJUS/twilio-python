@@ -85,6 +85,7 @@ class ChannelInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ChannelContext] = None
 
     @property
@@ -694,6 +695,7 @@ class ChannelPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ChannelInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -1030,6 +1032,7 @@ class ChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 type=type,
@@ -1059,6 +1062,7 @@ class ChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

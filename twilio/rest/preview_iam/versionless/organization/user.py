@@ -242,6 +242,7 @@ class UserInstance(InstanceResource):
             "organization_sid": organization_sid,
             "id": id or self.id,
         }
+
         self._context: Optional[UserContext] = None
 
     @property
@@ -1105,6 +1106,7 @@ class UserPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return UserInstance(
             self._version, payload, organization_sid=self._solution["organization_sid"]
         )
@@ -1531,6 +1533,7 @@ class UserList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 filter=filter,
@@ -1560,6 +1563,7 @@ class UserList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

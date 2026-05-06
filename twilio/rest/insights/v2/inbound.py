@@ -147,6 +147,7 @@ class InboundInstance(InstanceResource):
         self._solution = {
             "report_id": report_id or self.report_id,
         }
+
         self._context: Optional[InboundContext] = None
 
     @property
@@ -488,6 +489,7 @@ class InboundPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return InboundInstance(
             self._version, payload, report_id=self._solution["report_id"]
         )
@@ -851,6 +853,7 @@ class InboundList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -877,6 +880,7 @@ class InboundList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

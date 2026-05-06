@@ -67,6 +67,7 @@ class ChunkPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ChunkInstance(self._version, payload, id=self._solution["id"])
 
     def __repr__(self) -> str:
@@ -215,6 +216,7 @@ class ChunkList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -241,6 +243,7 @@ class ChunkList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

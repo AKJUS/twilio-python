@@ -57,6 +57,7 @@ class TrustProductsChannelEndpointAssignmentInstance(InstanceResource):
             "trust_product_sid": trust_product_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[TrustProductsChannelEndpointAssignmentContext] = None
 
     @property
@@ -364,6 +365,7 @@ class TrustProductsChannelEndpointAssignmentPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return TrustProductsChannelEndpointAssignmentInstance(
             self._version,
             payload,
@@ -690,6 +692,7 @@ class TrustProductsChannelEndpointAssignmentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 channel_endpoint_sid=channel_endpoint_sid,
@@ -722,6 +725,7 @@ class TrustProductsChannelEndpointAssignmentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

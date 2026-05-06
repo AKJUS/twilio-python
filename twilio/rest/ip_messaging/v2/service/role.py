@@ -68,6 +68,7 @@ class RoleInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[RoleContext] = None
 
     @property
@@ -527,6 +528,7 @@ class RolePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return RoleInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -809,6 +811,7 @@ class RoleList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -835,6 +838,7 @@ class RoleList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

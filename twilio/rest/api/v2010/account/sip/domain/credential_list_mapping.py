@@ -61,6 +61,7 @@ class CredentialListMappingInstance(InstanceResource):
             "domain_sid": domain_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[CredentialListMappingContext] = None
 
     @property
@@ -369,6 +370,7 @@ class CredentialListMappingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return CredentialListMappingInstance(
             self._version,
             payload,
@@ -648,6 +650,7 @@ class CredentialListMappingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -674,6 +677,7 @@ class CredentialListMappingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

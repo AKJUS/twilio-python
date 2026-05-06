@@ -69,6 +69,7 @@ class IpAddressInstance(InstanceResource):
             "ip_access_control_list_sid": ip_access_control_list_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[IpAddressContext] = None
 
     @property
@@ -641,6 +642,7 @@ class IpAddressPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return IpAddressInstance(
             self._version,
             payload,
@@ -970,6 +972,7 @@ class IpAddressList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -996,6 +999,7 @@ class IpAddressList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

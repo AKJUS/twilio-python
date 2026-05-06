@@ -58,6 +58,7 @@ class SyncMapPermissionInstance(InstanceResource):
             "map_sid": map_sid,
             "identity": identity or self.identity,
         }
+
         self._context: Optional[SyncMapPermissionContext] = None
 
     @property
@@ -580,6 +581,7 @@ class SyncMapPermissionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SyncMapPermissionInstance(
             self._version,
             payload,
@@ -737,6 +739,7 @@ class SyncMapPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -763,6 +766,7 @@ class SyncMapPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

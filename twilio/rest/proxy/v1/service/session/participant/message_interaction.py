@@ -128,6 +128,7 @@ class MessageInteractionInstance(InstanceResource):
             "participant_sid": participant_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[MessageInteractionContext] = None
 
     @property
@@ -346,6 +347,7 @@ class MessageInteractionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MessageInteractionInstance(
             self._version,
             payload,
@@ -656,6 +658,7 @@ class MessageInteractionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -682,6 +685,7 @@ class MessageInteractionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

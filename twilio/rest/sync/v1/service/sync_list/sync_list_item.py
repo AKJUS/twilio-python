@@ -80,6 +80,7 @@ class SyncListItemInstance(InstanceResource):
             "list_sid": list_sid,
             "index": index or self.index,
         }
+
         self._context: Optional[SyncListItemContext] = None
 
     @property
@@ -744,6 +745,7 @@ class SyncListItemPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SyncListItemInstance(
             self._version,
             payload,
@@ -1111,6 +1113,7 @@ class SyncListItemList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 order=order,
@@ -1146,6 +1149,7 @@ class SyncListItemList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

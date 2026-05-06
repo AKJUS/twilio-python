@@ -658,6 +658,7 @@ class ReportInstance(InstanceResource):
         self._solution = {
             "report_id": report_id or self.report_id,
         }
+
         self._context: Optional[ReportContext] = None
 
     @property

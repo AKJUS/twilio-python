@@ -70,6 +70,7 @@ class InteractionChannelParticipantInstance(InstanceResource):
             "channel_sid": channel_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[InteractionChannelParticipantContext] = None
 
     @property
@@ -330,6 +331,7 @@ class InteractionChannelParticipantPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return InteractionChannelParticipantInstance(
             self._version,
             payload,
@@ -657,6 +659,7 @@ class InteractionChannelParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -683,6 +686,7 @@ class InteractionChannelParticipantList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

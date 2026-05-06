@@ -79,6 +79,7 @@ class UserBindingInstance(InstanceResource):
             "user_sid": user_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[UserBindingContext] = None
 
     @property
@@ -387,6 +388,7 @@ class UserBindingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return UserBindingInstance(
             self._version,
             payload,
@@ -568,6 +570,7 @@ class UserBindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 binding_type=binding_type,
@@ -599,6 +602,7 @@ class UserBindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

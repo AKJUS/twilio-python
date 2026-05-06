@@ -76,6 +76,7 @@ class PayloadInstance(InstanceResource):
             "add_on_result_sid": add_on_result_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[PayloadContext] = None
 
     @property
@@ -422,6 +423,7 @@ class PayloadPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return PayloadInstance(
             self._version,
             payload,
@@ -588,6 +590,7 @@ class PayloadList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -614,6 +617,7 @@ class PayloadList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

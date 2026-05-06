@@ -101,6 +101,7 @@ class NewChallengeInstance(InstanceResource):
         self._solution = {
             "service_sid": service_sid,
         }
+
         self._context: Optional[NewChallengeContext] = None
 
     @property

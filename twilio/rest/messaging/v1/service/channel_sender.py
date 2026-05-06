@@ -63,6 +63,7 @@ class ChannelSenderInstance(InstanceResource):
             "messaging_service_sid": messaging_service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ChannelSenderContext] = None
 
     @property
@@ -364,6 +365,7 @@ class ChannelSenderPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ChannelSenderInstance(
             self._version,
             payload,
@@ -626,6 +628,7 @@ class ChannelSenderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -652,6 +655,7 @@ class ChannelSenderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -65,6 +65,7 @@ class BucketInstance(InstanceResource):
             "rate_limit_sid": rate_limit_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[BucketContext] = None
 
     @property
@@ -597,6 +598,7 @@ class BucketPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return BucketInstance(
             self._version,
             payload,
@@ -876,6 +878,7 @@ class BucketList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -902,6 +905,7 @@ class BucketList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

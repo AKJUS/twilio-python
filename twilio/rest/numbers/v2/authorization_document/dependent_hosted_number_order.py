@@ -115,6 +115,7 @@ class DependentHostedNumberOrderPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return DependentHostedNumberOrderInstance(
             self._version,
             payload,
@@ -341,6 +342,7 @@ class DependentHostedNumberOrderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 status=status,
@@ -381,6 +383,7 @@ class DependentHostedNumberOrderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

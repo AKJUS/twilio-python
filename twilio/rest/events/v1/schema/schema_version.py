@@ -55,6 +55,7 @@ class SchemaVersionInstance(InstanceResource):
             "id": id,
             "schema_version": schema_version or self.schema_version,
         }
+
         self._context: Optional[SchemaVersionContext] = None
 
     @property
@@ -250,6 +251,7 @@ class SchemaVersionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SchemaVersionInstance(self._version, payload, id=self._solution["id"])
 
     def __repr__(self) -> str:
@@ -398,6 +400,7 @@ class SchemaVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -424,6 +427,7 @@ class SchemaVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

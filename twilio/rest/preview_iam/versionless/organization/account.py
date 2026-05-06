@@ -53,6 +53,7 @@ class AccountInstance(InstanceResource):
             "organization_sid": organization_sid,
             "account_sid": account_sid or self.account_sid,
         }
+
         self._context: Optional[AccountContext] = None
 
     @property
@@ -250,6 +251,7 @@ class AccountPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AccountInstance(
             self._version, payload, organization_sid=self._solution["organization_sid"]
         )
@@ -400,6 +402,7 @@ class AccountList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -426,6 +429,7 @@ class AccountList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -103,6 +103,7 @@ class RecordingInstance(InstanceResource):
             "conference_sid": conference_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[RecordingContext] = None
 
     @property
@@ -637,6 +638,7 @@ class RecordingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return RecordingInstance(
             self._version,
             payload,
@@ -842,6 +844,7 @@ class RecordingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 date_created=date_created,
@@ -877,6 +880,7 @@ class RecordingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

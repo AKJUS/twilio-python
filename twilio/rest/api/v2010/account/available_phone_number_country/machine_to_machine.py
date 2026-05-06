@@ -85,6 +85,7 @@ class MachineToMachinePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MachineToMachineInstance(
             self._version,
             payload,
@@ -500,6 +501,7 @@ class MachineToMachineList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 area_code=area_code,
@@ -580,6 +582,7 @@ class MachineToMachineList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -64,6 +64,7 @@ class EvaluationInstance(InstanceResource):
             "bundle_sid": bundle_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[EvaluationContext] = None
 
     @property
@@ -263,6 +264,7 @@ class EvaluationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return EvaluationInstance(
             self._version, payload, bundle_sid=self._solution["bundle_sid"]
         )
@@ -497,6 +499,7 @@ class EvaluationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -523,6 +526,7 @@ class EvaluationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

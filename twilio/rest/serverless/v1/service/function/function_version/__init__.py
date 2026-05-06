@@ -74,6 +74,7 @@ class FunctionVersionInstance(InstanceResource):
             "function_sid": function_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[FunctionVersionContext] = None
 
     @property
@@ -303,6 +304,7 @@ class FunctionVersionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return FunctionVersionInstance(
             self._version,
             payload,
@@ -460,6 +462,7 @@ class FunctionVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -486,6 +489,7 @@ class FunctionVersionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -59,6 +59,7 @@ class MessagingConfigurationInstance(InstanceResource):
             "service_sid": service_sid,
             "country": country or self.country,
         }
+
         self._context: Optional[MessagingConfigurationContext] = None
 
     @property
@@ -534,6 +535,7 @@ class MessagingConfigurationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MessagingConfigurationInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -808,6 +810,7 @@ class MessagingConfigurationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -834,6 +837,7 @@ class MessagingConfigurationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

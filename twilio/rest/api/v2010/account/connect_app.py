@@ -75,6 +75,7 @@ class ConnectAppInstance(InstanceResource):
             "account_sid": account_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ConnectAppContext] = None
 
     @property
@@ -790,6 +791,7 @@ class ConnectAppPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ConnectAppInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -940,6 +942,7 @@ class ConnectAppList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -966,6 +969,7 @@ class ConnectAppList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

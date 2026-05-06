@@ -59,6 +59,7 @@ class OutgoingCallerIdInstance(InstanceResource):
             "account_sid": account_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[OutgoingCallerIdContext] = None
 
     @property
@@ -540,6 +541,7 @@ class OutgoingCallerIdPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return OutgoingCallerIdInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -726,6 +728,7 @@ class OutgoingCallerIdList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 phone_number=phone_number,
@@ -758,6 +761,7 @@ class OutgoingCallerIdList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

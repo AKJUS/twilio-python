@@ -67,6 +67,7 @@ class TaskChannelInstance(InstanceResource):
             "workspace_sid": workspace_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[TaskChannelContext] = None
 
     @property
@@ -598,6 +599,7 @@ class TaskChannelPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return TaskChannelInstance(
             self._version, payload, workspace_sid=self._solution["workspace_sid"]
         )
@@ -910,6 +912,7 @@ class TaskChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -936,6 +939,7 @@ class TaskChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

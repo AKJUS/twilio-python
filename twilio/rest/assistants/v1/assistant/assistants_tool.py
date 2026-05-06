@@ -67,6 +67,7 @@ class AssistantsToolInstance(InstanceResource):
             "assistant_id": assistant_id,
             "id": id or self.id,
         }
+
         self._context: Optional[AssistantsToolContext] = None
 
     @property
@@ -364,6 +365,7 @@ class AssistantsToolPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AssistantsToolInstance(
             self._version, payload, assistant_id=self._solution["assistant_id"]
         )
@@ -592,6 +594,7 @@ class AssistantsToolList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -618,6 +621,7 @@ class AssistantsToolList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

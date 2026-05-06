@@ -92,6 +92,7 @@ class VerificationInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[VerificationContext] = None
 
     @property

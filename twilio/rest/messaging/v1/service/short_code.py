@@ -63,6 +63,7 @@ class ShortCodeInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ShortCodeContext] = None
 
     @property
@@ -362,6 +363,7 @@ class ShortCodePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ShortCodeInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -614,6 +616,7 @@ class ShortCodeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -640,6 +643,7 @@ class ShortCodeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

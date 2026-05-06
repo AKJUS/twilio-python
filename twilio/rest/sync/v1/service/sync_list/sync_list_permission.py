@@ -58,6 +58,7 @@ class SyncListPermissionInstance(InstanceResource):
             "list_sid": list_sid,
             "identity": identity or self.identity,
         }
+
         self._context: Optional[SyncListPermissionContext] = None
 
     @property
@@ -582,6 +583,7 @@ class SyncListPermissionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SyncListPermissionInstance(
             self._version,
             payload,
@@ -739,6 +741,7 @@ class SyncListPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -765,6 +768,7 @@ class SyncListPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

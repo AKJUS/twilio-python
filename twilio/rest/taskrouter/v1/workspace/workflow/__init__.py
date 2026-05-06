@@ -86,6 +86,7 @@ class WorkflowInstance(InstanceResource):
             "workspace_sid": workspace_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[WorkflowContext] = None
 
     @property
@@ -789,6 +790,7 @@ class WorkflowPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return WorkflowInstance(
             self._version, payload, workspace_sid=self._solution["workspace_sid"]
         )
@@ -1143,6 +1145,7 @@ class WorkflowList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 friendly_name=friendly_name,
@@ -1172,6 +1175,7 @@ class WorkflowList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

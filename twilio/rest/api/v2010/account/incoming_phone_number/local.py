@@ -160,6 +160,7 @@ class LocalPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return LocalInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -868,6 +869,7 @@ class LocalList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 beta=beta,
@@ -906,6 +908,7 @@ class LocalList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

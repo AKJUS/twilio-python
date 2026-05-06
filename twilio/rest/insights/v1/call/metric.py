@@ -86,6 +86,7 @@ class MetricPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MetricInstance(
             self._version, payload, call_sid=self._solution["call_sid"]
         )
@@ -260,6 +261,7 @@ class MetricList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 edge=edge,
@@ -292,6 +294,7 @@ class MetricList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

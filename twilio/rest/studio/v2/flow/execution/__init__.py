@@ -82,6 +82,7 @@ class ExecutionInstance(InstanceResource):
             "flow_sid": flow_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ExecutionContext] = None
 
     @property
@@ -592,6 +593,7 @@ class ExecutionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ExecutionInstance(
             self._version, payload, flow_sid=self._solution["flow_sid"]
         )
@@ -920,6 +922,7 @@ class ExecutionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 status=status,
@@ -955,6 +958,7 @@ class ExecutionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

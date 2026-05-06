@@ -89,6 +89,7 @@ class ThisMonthPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ThisMonthInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -303,6 +304,7 @@ class ThisMonthList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 category=category,
@@ -341,6 +343,7 @@ class ThisMonthList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -81,6 +81,7 @@ class NotificationInstance(InstanceResource):
             "account_sid": account_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[NotificationContext] = None
 
     @property
@@ -278,6 +279,7 @@ class NotificationPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return NotificationInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -492,6 +494,7 @@ class NotificationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 log=log,
@@ -530,6 +533,7 @@ class NotificationList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

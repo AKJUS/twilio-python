@@ -61,6 +61,7 @@ class CredentialInstance(InstanceResource):
             "credential_list_sid": credential_list_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[CredentialContext] = None
 
     @property
@@ -549,6 +550,7 @@ class CredentialPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return CredentialInstance(
             self._version,
             payload,
@@ -830,6 +832,7 @@ class CredentialList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -856,6 +859,7 @@ class CredentialList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

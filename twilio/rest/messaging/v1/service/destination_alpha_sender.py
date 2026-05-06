@@ -63,6 +63,7 @@ class DestinationAlphaSenderInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[DestinationAlphaSenderContext] = None
 
     @property
@@ -364,6 +365,7 @@ class DestinationAlphaSenderPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return DestinationAlphaSenderInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -658,6 +660,7 @@ class DestinationAlphaSenderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 iso_country_code=iso_country_code,
@@ -687,6 +690,7 @@ class DestinationAlphaSenderList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

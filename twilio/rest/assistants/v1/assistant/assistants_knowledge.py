@@ -69,6 +69,7 @@ class AssistantsKnowledgeInstance(InstanceResource):
             "assistant_id": assistant_id,
             "id": id or self.id,
         }
+
         self._context: Optional[AssistantsKnowledgeContext] = None
 
     @property
@@ -366,6 +367,7 @@ class AssistantsKnowledgePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AssistantsKnowledgeInstance(
             self._version, payload, assistant_id=self._solution["assistant_id"]
         )
@@ -594,6 +596,7 @@ class AssistantsKnowledgeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -620,6 +623,7 @@ class AssistantsKnowledgeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

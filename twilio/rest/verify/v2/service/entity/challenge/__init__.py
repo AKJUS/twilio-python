@@ -115,6 +115,7 @@ class ChallengeInstance(InstanceResource):
             "identity": identity,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ChallengeContext] = None
 
     @property
@@ -568,6 +569,7 @@ class ChallengePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ChallengeInstance(
             self._version,
             payload,
@@ -995,6 +997,7 @@ class ChallengeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 factor_sid=factor_sid,
@@ -1030,6 +1033,7 @@ class ChallengeList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

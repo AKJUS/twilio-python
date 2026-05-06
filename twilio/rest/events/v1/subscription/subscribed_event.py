@@ -52,6 +52,7 @@ class SubscribedEventInstance(InstanceResource):
             "subscription_sid": subscription_sid,
             "type": type or self.type,
         }
+
         self._context: Optional[SubscribedEventContext] = None
 
     @property
@@ -533,6 +534,7 @@ class SubscribedEventPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SubscribedEventInstance(
             self._version, payload, subscription_sid=self._solution["subscription_sid"]
         )
@@ -809,6 +811,7 @@ class SubscribedEventList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -835,6 +838,7 @@ class SubscribedEventList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

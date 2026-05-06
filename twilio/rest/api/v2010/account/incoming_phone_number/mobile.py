@@ -160,6 +160,7 @@ class MobilePage(Page):
 
         :param payload: Payload response from the API
         """
+
         return MobileInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -880,6 +881,7 @@ class MobileList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 beta=beta,
@@ -918,6 +920,7 @@ class MobileList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

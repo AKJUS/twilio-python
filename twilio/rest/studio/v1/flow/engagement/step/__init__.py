@@ -76,6 +76,7 @@ class StepInstance(InstanceResource):
             "engagement_sid": engagement_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[StepContext] = None
 
     @property
@@ -303,6 +304,7 @@ class StepPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return StepInstance(
             self._version,
             payload,
@@ -460,6 +462,7 @@ class StepList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -486,6 +489,7 @@ class StepList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

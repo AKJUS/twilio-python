@@ -72,6 +72,7 @@ class BrandVettingInstance(InstanceResource):
             "brand_sid": brand_sid,
             "brand_vetting_sid": brand_vetting_sid or self.brand_vetting_sid,
         }
+
         self._context: Optional[BrandVettingContext] = None
 
     @property
@@ -271,6 +272,7 @@ class BrandVettingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return BrandVettingInstance(
             self._version, payload, brand_sid=self._solution["brand_sid"]
         )
@@ -587,6 +589,7 @@ class BrandVettingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 vetting_provider=vetting_provider,
@@ -618,6 +621,7 @@ class BrandVettingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

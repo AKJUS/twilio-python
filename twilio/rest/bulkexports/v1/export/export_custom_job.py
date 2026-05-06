@@ -76,6 +76,7 @@ class ExportCustomJobPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ExportCustomJobInstance(
             self._version, payload, resource_type=self._solution["resource_type"]
         )
@@ -432,6 +433,7 @@ class ExportCustomJobList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -458,6 +460,7 @@ class ExportCustomJobList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

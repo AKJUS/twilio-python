@@ -67,6 +67,7 @@ class ConnectionPolicyTargetInstance(InstanceResource):
             "connection_policy_sid": connection_policy_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ConnectionPolicyTargetContext] = None
 
     @property
@@ -678,6 +679,7 @@ class ConnectionPolicyTargetPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ConnectionPolicyTargetInstance(
             self._version,
             payload,
@@ -1030,6 +1032,7 @@ class ConnectionPolicyTargetList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -1056,6 +1059,7 @@ class ConnectionPolicyTargetList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

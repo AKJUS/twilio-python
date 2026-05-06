@@ -76,6 +76,7 @@ class BindingInstance(InstanceResource):
             "chat_service_sid": chat_service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[BindingContext] = None
 
     @property
@@ -377,6 +378,7 @@ class BindingPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return BindingInstance(
             self._version, payload, chat_service_sid=self._solution["chat_service_sid"]
         )
@@ -553,6 +555,7 @@ class BindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 binding_type=binding_type,
@@ -585,6 +588,7 @@ class BindingList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -57,6 +57,7 @@ class CustomerProfilesChannelEndpointAssignmentInstance(InstanceResource):
             "customer_profile_sid": customer_profile_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[CustomerProfilesChannelEndpointAssignmentContext] = None
 
     @property
@@ -364,6 +365,7 @@ class CustomerProfilesChannelEndpointAssignmentPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return CustomerProfilesChannelEndpointAssignmentInstance(
             self._version,
             payload,
@@ -688,6 +690,7 @@ class CustomerProfilesChannelEndpointAssignmentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 channel_endpoint_sid=channel_endpoint_sid,
@@ -720,6 +723,7 @@ class CustomerProfilesChannelEndpointAssignmentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

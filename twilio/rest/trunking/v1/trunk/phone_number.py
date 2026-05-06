@@ -110,6 +110,7 @@ class PhoneNumberInstance(InstanceResource):
             "trunk_sid": trunk_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[PhoneNumberContext] = None
 
     @property
@@ -409,6 +410,7 @@ class PhoneNumberPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return PhoneNumberInstance(
             self._version, payload, trunk_sid=self._solution["trunk_sid"]
         )
@@ -661,6 +663,7 @@ class PhoneNumberList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -687,6 +690,7 @@ class PhoneNumberList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

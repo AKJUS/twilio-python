@@ -79,6 +79,7 @@ class TranscriptionsInstance(InstanceResource):
             "room_sid": room_sid,
             "ttid": ttid or self.ttid,
         }
+
         self._context: Optional[TranscriptionsContext] = None
 
     @property
@@ -494,6 +495,7 @@ class TranscriptionsPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return TranscriptionsInstance(
             self._version, payload, room_sid=self._solution["room_sid"]
         )
@@ -756,6 +758,7 @@ class TranscriptionsList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -782,6 +785,7 @@ class TranscriptionsList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

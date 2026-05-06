@@ -113,6 +113,7 @@ class UsAppToPersonInstance(InstanceResource):
             "messaging_service_sid": messaging_service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[UsAppToPersonContext] = None
 
     @property
@@ -926,6 +927,7 @@ class UsAppToPersonPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return UsAppToPersonInstance(
             self._version,
             payload,
@@ -1526,6 +1528,7 @@ class UsAppToPersonList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 x_twilio_api_version=x_twilio_api_version,
@@ -1555,6 +1558,7 @@ class UsAppToPersonList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

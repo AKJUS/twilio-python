@@ -74,6 +74,7 @@ class DocumentInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[DocumentContext] = None
 
     @property
@@ -645,6 +646,7 @@ class DocumentPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return DocumentInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -943,6 +945,7 @@ class DocumentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -969,6 +972,7 @@ class DocumentList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

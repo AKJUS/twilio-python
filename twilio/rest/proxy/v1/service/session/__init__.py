@@ -100,6 +100,7 @@ class SessionInstance(InstanceResource):
             "service_sid": service_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[SessionContext] = None
 
     @property
@@ -686,6 +687,7 @@ class SessionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return SessionInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -1046,6 +1048,7 @@ class SessionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -1072,6 +1075,7 @@ class SessionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

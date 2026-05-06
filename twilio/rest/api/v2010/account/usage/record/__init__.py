@@ -97,6 +97,7 @@ class RecordPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return RecordInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -320,6 +321,7 @@ class RecordList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 category=category,
@@ -358,6 +360,7 @@ class RecordList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

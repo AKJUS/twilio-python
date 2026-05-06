@@ -63,6 +63,7 @@ class ActivityInstance(InstanceResource):
             "workspace_sid": workspace_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[ActivityContext] = None
 
     @property
@@ -544,6 +545,7 @@ class ActivityPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return ActivityInstance(
             self._version, payload, workspace_sid=self._solution["workspace_sid"]
         )
@@ -852,6 +854,7 @@ class ActivityList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 friendly_name=friendly_name,
@@ -884,6 +887,7 @@ class ActivityList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

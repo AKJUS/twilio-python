@@ -69,6 +69,7 @@ class AvailablePhoneNumberCountryInstance(InstanceResource):
             "account_sid": account_sid,
             "country_code": country_code or self.country_code,
         }
+
         self._context: Optional[AvailablePhoneNumberCountryContext] = None
 
     @property
@@ -422,6 +423,7 @@ class AvailablePhoneNumberCountryPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return AvailablePhoneNumberCountryInstance(
             self._version, payload, account_sid=self._solution["account_sid"]
         )
@@ -574,6 +576,7 @@ class AvailablePhoneNumberCountryList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -600,6 +603,7 @@ class AvailablePhoneNumberCountryList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

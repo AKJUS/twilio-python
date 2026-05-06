@@ -58,6 +58,7 @@ class DocumentPermissionInstance(InstanceResource):
             "document_sid": document_sid,
             "identity": identity or self.identity,
         }
+
         self._context: Optional[DocumentPermissionContext] = None
 
     @property
@@ -580,6 +581,7 @@ class DocumentPermissionPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return DocumentPermissionInstance(
             self._version,
             payload,
@@ -739,6 +741,7 @@ class DocumentPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -765,6 +768,7 @@ class DocumentPermissionList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

@@ -69,6 +69,7 @@ class LogInstance(InstanceResource):
             "environment_sid": environment_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[LogContext] = None
 
     @property
@@ -277,6 +278,7 @@ class LogPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return LogInstance(
             self._version,
             payload,
@@ -484,6 +486,7 @@ class LogList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 function_sid=function_sid,
@@ -519,6 +522,7 @@ class LogList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

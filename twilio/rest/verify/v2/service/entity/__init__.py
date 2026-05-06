@@ -64,6 +64,7 @@ class EntityInstance(InstanceResource):
             "service_sid": service_sid,
             "identity": identity or self.identity,
         }
+
         self._context: Optional[EntityContext] = None
 
     @property
@@ -429,6 +430,7 @@ class EntityPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return EntityInstance(
             self._version, payload, service_sid=self._solution["service_sid"]
         )
@@ -679,6 +681,7 @@ class EntityList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -705,6 +708,7 @@ class EntityList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

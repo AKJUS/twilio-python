@@ -81,6 +81,7 @@ class WorkerChannelInstance(InstanceResource):
             "worker_sid": worker_sid,
             "sid": sid or self.sid,
         }
+
         self._context: Optional[WorkerChannelContext] = None
 
     @property
@@ -509,6 +510,7 @@ class WorkerChannelPage(Page):
 
         :param payload: Payload response from the API
         """
+
         return WorkerChannelInstance(
             self._version,
             payload,
@@ -666,6 +668,7 @@ class WorkerChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return list(
             self.stream(
                 limit=limit,
@@ -692,6 +695,7 @@ class WorkerChannelList(ListResource):
 
         :returns: list that will contain up to limit results
         """
+
         return [
             record
             async for record in await self.stream_async(

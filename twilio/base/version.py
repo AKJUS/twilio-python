@@ -382,14 +382,72 @@ class Version(object):
         payload = self._parse_update(method, uri, response)
         return payload, response.status_code, dict(response.headers or {})
 
-    def _parse_delete(self, method: str, uri: str, response: Response) -> bool:
+    def patch_with_response_info(
+        self,
+        method: str,
+        uri: str,
+        params: Optional[Dict[str, object]] = None,
+        data: Optional[Dict[str, object]] = None,
+        headers: Optional[Dict[str, str]] = None,
+        auth: Optional[Tuple[str, str]] = None,
+        timeout: Optional[float] = None,
+        allow_redirects: bool = False,
+    ) -> Tuple[Any, int, Dict[str, str]]:
+        return self.update_with_response_info(
+            method,
+            uri,
+            params=params,
+            data=data,
+            headers=headers,
+            auth=auth,
+            timeout=timeout,
+            allow_redirects=allow_redirects,
+        )
+
+    async def patch_with_response_info_async(
+        self,
+        method: str,
+        uri: str,
+        params: Optional[Dict[str, object]] = None,
+        data: Optional[Dict[str, object]] = None,
+        headers: Optional[Dict[str, str]] = None,
+        auth: Optional[Tuple[str, str]] = None,
+        timeout: Optional[float] = None,
+        allow_redirects: bool = False,
+    ) -> Tuple[Any, int, Dict[str, str]]:
+        return await self.update_with_response_info_async(
+            method,
+            uri,
+            params=params,
+            data=data,
+            headers=headers,
+            auth=auth,
+            timeout=timeout,
+            allow_redirects=allow_redirects,
+        )
+
+    def _parse_delete(self, method: str, uri: str, response: Response) -> Any:
         """
-        Parses delete response JSON
+        Parses delete response. Returns response body as dict if present, otherwise True.
+
+        For V1 APIs that return response bodies on delete (e.g., 202 with JSON),
+        this returns the parsed JSON payload. For traditional deletes (e.g., 204 No Content),
+        this returns True for backward compatibility.
         """
         if response.status_code < 200 or response.status_code >= 300:
             raise self.exception(method, uri, response, "Unable to delete record")
 
-        return True  # if response code is 2XX, deletion was successful
+        # If response has content, parse and return it (V1 delete with response body)
+        if response.content and response.text:
+            try:
+                return json.loads(response.text)
+            except (ValueError, json.JSONDecodeError):
+                # If JSON parsing fails, fall back to boolean
+                pass
+
+        return (
+            True  # Traditional delete: if response code is 2XX, deletion was successful
+        )
 
     def delete(
         self,
@@ -455,14 +513,15 @@ class Version(object):
         auth: Optional[Tuple[str, str]] = None,
         timeout: Optional[float] = None,
         allow_redirects: bool = False,
-    ) -> Tuple[bool, int, Dict[str, str]]:
+    ) -> Tuple[Union[Dict[str, Any], bool], int, Dict[str, str]]:
         """
         Delete a resource and return response metadata
 
         Returns:
-            tuple: (success_boolean, status_code, headers_dict)
-                - success_boolean: True if deletion was successful (2XX response)
-                - status_code: HTTP status code (typically 204 for successful delete)
+            tuple: (payload_or_success, status_code, headers_dict)
+                - payload_or_success: Response body dict if present (V1 APIs with response body),
+                                     or True boolean for traditional deletes (204 No Content)
+                - status_code: HTTP status code (typically 202 or 204 for successful delete)
                 - headers_dict: Response headers as a dictionary
         """
         response = self.request(
@@ -475,8 +534,8 @@ class Version(object):
             timeout=timeout,
             allow_redirects=allow_redirects,
         )
-        success = self._parse_delete(method, uri, response)
-        return success, response.status_code, dict(response.headers or {})
+        result = self._parse_delete(method, uri, response)
+        return result, response.status_code, dict(response.headers or {})
 
     async def delete_with_response_info_async(
         self,
@@ -488,14 +547,15 @@ class Version(object):
         auth: Optional[Tuple[str, str]] = None,
         timeout: Optional[float] = None,
         allow_redirects: bool = False,
-    ) -> Tuple[bool, int, Dict[str, str]]:
+    ) -> Tuple[Union[Dict[str, Any], bool], int, Dict[str, str]]:
         """
         Asynchronously delete a resource and return response metadata
 
         Returns:
-            tuple: (success_boolean, status_code, headers_dict)
-                - success_boolean: True if deletion was successful (2XX response)
-                - status_code: HTTP status code (typically 204 for successful delete)
+            tuple: (payload_or_success, status_code, headers_dict)
+                - payload_or_success: Response body dict if present (V1 APIs with response body),
+                                     or True boolean for traditional deletes (204 No Content)
+                - status_code: HTTP status code (typically 202 or 204 for successful delete)
                 - headers_dict: Response headers as a dictionary
         """
         response = await self.request_async(
@@ -508,8 +568,8 @@ class Version(object):
             timeout=timeout,
             allow_redirects=allow_redirects,
         )
-        success = self._parse_delete(method, uri, response)
-        return success, response.status_code, dict(response.headers or {})
+        result = self._parse_delete(method, uri, response)
+        return result, response.status_code, dict(response.headers or {})
 
     def read_limits(
         self, limit: Optional[int] = None, page_size: Optional[int] = None

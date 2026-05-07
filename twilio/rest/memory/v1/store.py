@@ -82,6 +82,42 @@ class StoreInstance(InstanceResource):
             )
         return self._context
 
+    def delete(self) -> bool:
+        """
+        Deletes the StoreInstance
+
+
+        :returns: True if delete succeeds, False otherwise
+        """
+        return self._proxy.delete()
+
+    async def delete_async(self) -> bool:
+        """
+        Asynchronous coroutine that deletes the StoreInstance
+
+
+        :returns: True if delete succeeds, False otherwise
+        """
+        return await self._proxy.delete_async()
+
+    def delete_with_http_info(self) -> ApiResponse:
+        """
+        Deletes the StoreInstance with HTTP info
+
+
+        :returns: ApiResponse with success boolean, status code, and headers
+        """
+        return self._proxy.delete_with_http_info()
+
+    async def delete_with_http_info_async(self) -> ApiResponse:
+        """
+        Asynchronous coroutine that deletes the StoreInstance with HTTP info
+
+
+        :returns: ApiResponse with success boolean, status code, and headers
+        """
+        return await self._proxy.delete_with_http_info_async()
+
     def fetch(self) -> "StoreInstance":
         """
         Fetch the StoreInstance
@@ -180,6 +216,78 @@ class StoreContext(InstanceContext):
             "store_id": store_id,
         }
         self._uri = "/ControlPlane/Stores/{store_id}".format(**self._solution)
+
+    def _delete(self) -> tuple:
+        """
+        Internal helper for delete operation
+
+        Returns:
+            tuple: (success_boolean, status_code, headers)
+        """
+
+        headers = values.of({})
+
+        headers["Accept"] = "application/json"
+
+        return self._version.delete_with_response_info(
+            method="DELETE", uri=self._uri, headers=headers
+        )
+
+    def delete(self) -> bool:
+        """
+        Deletes the StoreInstance
+
+
+        :returns: True if delete succeeds, False otherwise
+        """
+        success, _, _ = self._delete()
+        return success
+
+    def delete_with_http_info(self) -> ApiResponse:
+        """
+        Deletes the StoreInstance and return response metadata
+
+
+        :returns: ApiResponse with success boolean, status code, and headers
+        """
+        success, status_code, headers = self._delete()
+        return ApiResponse(data=success, status_code=status_code, headers=headers)
+
+    async def _delete_async(self) -> tuple:
+        """
+        Internal async helper for delete operation
+
+        Returns:
+            tuple: (success_boolean, status_code, headers)
+        """
+
+        headers = values.of({})
+
+        headers["Accept"] = "application/json"
+
+        return await self._version.delete_with_response_info_async(
+            method="DELETE", uri=self._uri, headers=headers
+        )
+
+    async def delete_async(self) -> bool:
+        """
+        Asynchronous coroutine that deletes the StoreInstance
+
+
+        :returns: True if delete succeeds, False otherwise
+        """
+        success, _, _ = await self._delete_async()
+        return success
+
+    async def delete_with_http_info_async(self) -> ApiResponse:
+        """
+        Asynchronous coroutine that deletes the StoreInstance and return response metadata
+
+
+        :returns: ApiResponse with success boolean, status code, and headers
+        """
+        success, status_code, headers = await self._delete_async()
+        return ApiResponse(data=success, status_code=status_code, headers=headers)
 
     def _fetch(self) -> tuple:
         """

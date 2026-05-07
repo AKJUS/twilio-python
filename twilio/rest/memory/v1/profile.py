@@ -14,8 +14,9 @@ r"""
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, Dict, List, Optional, Union, Iterator, AsyncIterator
-from twilio.base import values
+from twilio.base import deserialize, values
 from twilio.base.api_response import ApiResponse
 from twilio.base.instance_context import InstanceContext
 from twilio.base.instance_resource import InstanceResource
@@ -30,6 +31,8 @@ class ProfileInstance(InstanceResource):
     :ivar meta:
     :ivar message:
     :ivar id: The canonical profile ID.
+    :ivar created_at: The time the profile was created.
+    :ivar traits: Multiple trait groups.
     """
 
     def __init__(
@@ -45,6 +48,10 @@ class ProfileInstance(InstanceResource):
         self.meta: Optional[ProfilesMeta] = payload.get("meta")
         self.message: Optional[str] = payload.get("message")
         self.id: Optional[str] = payload.get("id")
+        self.created_at: Optional[datetime] = deserialize.iso8601_datetime(
+            payload.get("createdAt")
+        )
+        self.traits: Optional[Dict[str, Dict[str, object]]] = payload.get("traits")
 
         # Only set _solution if path params are provided (not None)
         if store_id is not None or profile_id is not None:
@@ -106,6 +113,62 @@ class ProfileInstance(InstanceResource):
         :returns: ApiResponse with success boolean, status code, and headers
         """
         return await self._proxy.delete_with_http_info_async()
+
+    def fetch(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> "ProfileInstance":
+        """
+        Fetch the ProfileInstance
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: The fetched ProfileInstance
+        """
+        return self._proxy.fetch(
+            trait_groups=trait_groups,
+        )
+
+    async def fetch_async(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> "ProfileInstance":
+        """
+        Asynchronous coroutine to fetch the ProfileInstance
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: The fetched ProfileInstance
+        """
+        return await self._proxy.fetch_async(
+            trait_groups=trait_groups,
+        )
+
+    def fetch_with_http_info(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> ApiResponse:
+        """
+        Fetch the ProfileInstance with HTTP info
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: ApiResponse with instance, status code, and headers
+        """
+        return self._proxy.fetch_with_http_info(
+            trait_groups=trait_groups,
+        )
+
+    async def fetch_with_http_info_async(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> ApiResponse:
+        """
+        Asynchronous coroutine to fetch the ProfileInstance with HTTP info
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: ApiResponse with instance, status code, and headers
+        """
+        return await self._proxy.fetch_with_http_info_async(
+            trait_groups=trait_groups,
+        )
 
     def patch(self, profile_patch: ProfilePatch) -> "ProfileInstance":
         """
@@ -231,6 +294,126 @@ class ProfileContext(InstanceContext):
         """
         success, status_code, headers = await self._delete_async()
         return ApiResponse(data=success, status_code=status_code, headers=headers)
+
+    def _fetch(self, trait_groups: Union[str, object] = values.unset) -> tuple:
+        """
+        Internal helper for fetch operation
+
+        Returns:
+            tuple: (payload, status_code, headers)
+        """
+
+        params = values.of(
+            {
+                "traitGroups": trait_groups,
+            }
+        )
+
+        headers = values.of({})
+
+        headers["Accept"] = "application/json"
+
+        return self._version.fetch_with_response_info(
+            method="GET", uri=self._uri, params=params, headers=headers
+        )
+
+    def fetch(self, trait_groups: Union[str, object] = values.unset) -> ProfileInstance:
+        """
+        Fetch the ProfileInstance
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: The fetched ProfileInstance
+        """
+        payload, _, _ = self._fetch(trait_groups=trait_groups)
+        return ProfileInstance(
+            self._version,
+            payload,
+            store_id=self._solution["store_id"],
+            profile_id=self._solution["profile_id"],
+        )
+
+    def fetch_with_http_info(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> ApiResponse:
+        """
+        Fetch the ProfileInstance and return response metadata
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: ApiResponse with instance, status code, and headers
+        """
+        payload, status_code, headers = self._fetch(trait_groups=trait_groups)
+        instance = ProfileInstance(
+            self._version,
+            payload,
+            store_id=self._solution["store_id"],
+            profile_id=self._solution["profile_id"],
+        )
+        return ApiResponse(data=instance, status_code=status_code, headers=headers)
+
+    async def _fetch_async(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> tuple:
+        """
+        Internal async helper for fetch operation
+
+        Returns:
+            tuple: (payload, status_code, headers)
+        """
+
+        params = values.of(
+            {
+                "traitGroups": trait_groups,
+            }
+        )
+
+        headers = values.of({})
+
+        headers["Accept"] = "application/json"
+
+        return await self._version.fetch_with_response_info_async(
+            method="GET", uri=self._uri, params=params, headers=headers
+        )
+
+    async def fetch_async(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> ProfileInstance:
+        """
+        Asynchronous coroutine to fetch the ProfileInstance
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: The fetched ProfileInstance
+        """
+        payload, _, _ = await self._fetch_async(trait_groups=trait_groups)
+        return ProfileInstance(
+            self._version,
+            payload,
+            store_id=self._solution["store_id"],
+            profile_id=self._solution["profile_id"],
+        )
+
+    async def fetch_with_http_info_async(
+        self, trait_groups: Union[str, object] = values.unset
+    ) -> ApiResponse:
+        """
+        Asynchronous coroutine to fetch the ProfileInstance and return response metadata
+
+        :param trait_groups: Comma separated list of trait group names to include.
+
+        :returns: ApiResponse with instance, status code, and headers
+        """
+        payload, status_code, headers = await self._fetch_async(
+            trait_groups=trait_groups
+        )
+        instance = ProfileInstance(
+            self._version,
+            payload,
+            store_id=self._solution["store_id"],
+            profile_id=self._solution["profile_id"],
+        )
+        return ApiResponse(data=instance, status_code=status_code, headers=headers)
 
     def _patch(self, profile_patch: ProfilePatch) -> tuple:
         """

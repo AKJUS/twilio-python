@@ -15,6 +15,7 @@ r"""
 from typing import Optional
 from twilio.base.version import Version
 from twilio.base.domain import Domain
+from twilio.rest.conversations.v2.action import ActionList
 from twilio.rest.conversations.v2.communication import CommunicationList
 from twilio.rest.conversations.v2.configuration import ConfigurationList
 from twilio.rest.conversations.v2.conversation import ConversationList
@@ -34,6 +35,20 @@ class V2(Version):
         self._configurations: Optional[ConfigurationList] = None
         self._conversations: Optional[ConversationList] = None
         self._operations: Optional[OperationList] = None
+
+    def actions(self, conversation_id: str, action_id: str = None):
+        """
+        Access the ActionList resource
+
+        :param conversation_id:
+
+        :param action_id: Optional instance ID to directly access ActionContext
+        :returns: ActionList instance if action_id is None, otherwise ActionContext
+        """
+        list_instance = ActionList(self, conversation_id)
+        if action_id is not None:
+            return list_instance(action_id)
+        return list_instance
 
     def communications(self, conversation_sid: str, communication_id: str = None):
         """
